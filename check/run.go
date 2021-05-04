@@ -185,7 +185,7 @@ func collectedResolvedCertificates(ctx context.Context, collector Collector, hos
 	results := make(map[string][]*x509.Certificate)
 
 	dialer := tlsCheckerDialer{
-		Timeout: 10 * time.Second,
+		Timeout: 15 * time.Second,
 	}
 
 	for _, ip := range ips {

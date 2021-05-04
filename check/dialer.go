@@ -23,5 +23,5 @@ func (cd tlsCheckerDialer) Dial(ctx context.Context, host, port, ip string) (con
 		ServerName:         host,
 		Time:               func() time.Time { return time.Now().UTC() },
 	}
-	return tls.DialWithDialer(&net.Dialer{Timeout: 15 * time.Second}, "tcp", net.JoinHostPort(ip, port), tlsConfig)
+	return tls.DialWithDialer(&net.Dialer{Timeout: cd.Timeout}, "tcp", net.JoinHostPort(ip, port), tlsConfig)
 }
