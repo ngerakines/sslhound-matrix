@@ -46,3 +46,23 @@ A configuration file (`config.json`) is required. It must contain the user id, a
 6. Request a check:
    
    `!check your.matrix.host:443`
+
+## Docker
+
+1. Build
+
+       $ docker build -t sslhound-matrix .
+
+2. Run
+
+       $ docker run -v C:\path\to\sslhound-matrix\config.json:/app/config.json sslhound-matrix -- --config=/app/config.json
+
+3. Use
+
+   `!check heroku.com:443`
+
+# License
+
+MIT License
+
+Copyright (c) 2021 Nick Gerakines
