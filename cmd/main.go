@@ -25,15 +25,24 @@ type handler struct {
 }
 
 func (h *handler) handleMessage(event *gomatrix.Event) {
+	msgtype, ok := event.Content["msgtype"].(string)
+	if !ok {
+		return
+	}
+	if msgtype != "m.text" {
+		return
+	}
+
 	body := event.Content["body"].(string)
-	log.Println(body)
 
 	messageParts := strings.Split(body, " ")
 	if len(messageParts) != 2 {
+		log.Println("Invalid check command format")
 		return
 	}
 
 	if messageParts[0] != "!check" {
+		log.Println("Not a check command")
 		return
 	}
 
@@ -42,6 +51,7 @@ func (h *handler) handleMessage(event *gomatrix.Event) {
 		log.Println("Unable to send checking message:", err)
 		return
 	}
+
 
 	host, port, err := net.SplitHostPort(messageParts[1])
 	if err != nil {
